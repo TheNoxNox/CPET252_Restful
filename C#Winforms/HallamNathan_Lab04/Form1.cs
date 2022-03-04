@@ -23,16 +23,16 @@ namespace HallamNathan_Lab04
             {
                 _Employee.job = new Job(_Employee.job_id);
                 _Employee.publisher = new Publisher(_Employee.pub_id);
-                lstbx_employees.Items.Add(_Employee.fname);
+ if (_Employee.mint != null)  lstbx_employees.Items.Add(_Employee.mint);
             }
 
-            Employee test = new Employee("C-1234568", "GERRETAL", "T", "LNAME", 10, 87, "1389", "19911026");
+            Employee test = new Employee("C-1234568", "GERRETAL", 'T', "LNAME", 10, 87, "1389", "19911026");
 
 //            conn.DeleteEmployee(test);
 
 //            conn.PostEmployee(test);
 
-            MessageBox.Show(conn.GetEmployee(test.emp_id).mint);
+            MessageBox.Show(conn.GetEmployee(test.emp_id).mint.ToString());
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace HallamNathan_Lab04
 
         }
 
-        public Employee(string ID, string FirstName, string MiddleInitial, string LastName, int JobID, int JobLevel, string PubID, string DateOfHire)
+        public Employee(string ID, string FirstName, char MiddleInitial, string LastName, int JobID, int JobLevel, string PubID, string DateOfHire)
         {
             emp_id = ID;
             fname = FirstName;
@@ -69,7 +69,7 @@ namespace HallamNathan_Lab04
 
         public string emp_id;
         public string fname;
-        public string mint;
+        public char mint;
         public string lname;
         public int job_id;
         public int job_lvl;
