@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HallamNathan_Lab04
 {
@@ -17,6 +19,127 @@ namespace HallamNathan_Lab04
             return url;
         }
 
+        #region Employees
+        public List<Employee> GetEmployees()
+        {
+            string url = GetConnection() + "/employees";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
+            request.Method = "GET";
+            request.ContentLength = 0;
+            request.ContentType = "application/json";
+
+            using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+            {
+                var json = string.Empty;
+
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new ApplicationException(response.StatusCode.ToString());
+                }
+
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
+                        using (var reader = new System.IO.StreamReader(responseStream))
+                        {
+                            json = reader.ReadToEnd();
+
+                            List<Employee> Employees = JsonConvert.DeserializeObject<List<Employee>>(json);
+
+                            return Employees;
+                        }
+                }
+
+                return null;
+            }
+        }
+
+        public Employee GetEmployee(string id)
+        {
+            string url = GetConnection() + "/employees/" + id;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
+            request.Method = "GET";
+            request.ContentLength = 0;
+            request.ContentType = "application/json";
+
+            using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+            {
+                var json = string.Empty;
+
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new ApplicationException(response.StatusCode.ToString());
+                }
+
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream != null)
+                        using (var reader = new System.IO.StreamReader(responseStream))
+                        {
+                            json = reader.ReadToEnd();
+
+                            List<Employee> Employee = JsonConvert.DeserializeObject<List<Employee>>(json);
+
+                            return Employee[0];
+                        }
+                }
+
+                return null;
+            }
+        }
+
+        public bool PostEmployee(Employee employee)
+        {
+            string url = GetConnection() + "/employees";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+
+            string json = JsonConvert.SerializeObject(employee);
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            MessageBox.Show(response.StatusCode.ToString());
+
+            if (response.StatusCode == HttpStatusCode.OK) return true;
+
+            return false;
+        }
+
+        public bool DeleteEmployee(Employee employee)
+        {
+            string url = GetConnection() + "/employees";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+
+            string json = JsonConvert.SerializeObject(employee);
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            MessageBox.Show(response.StatusCode.ToString());
+
+            if (response.StatusCode == HttpStatusCode.OK) return true;
+
+            return false;
+        }
+        #endregion Employees
+
+        #region Jobs
         public List<Job> GetJobs()
         {
             string url = GetConnection() + "/jobs";
@@ -86,77 +209,9 @@ namespace HallamNathan_Lab04
                 return null;
             }
         }
+        #endregion Jobs
 
-        public List<Employee> GetEmployees()
-        {
-            string url = GetConnection() + "/employees";
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
-            request.Method = "GET";
-            request.ContentLength = 0;
-            request.ContentType = "application/json";
-
-            using (var response = (System.Net.HttpWebResponse)request.GetResponse())
-            {
-                var json = string.Empty;
-
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    throw new ApplicationException(response.StatusCode.ToString());
-                }
-
-                using (var responseStream = response.GetResponseStream())
-                {
-                    if (responseStream != null)
-                        using (var reader = new System.IO.StreamReader(responseStream))
-                        {
-                            json = reader.ReadToEnd();
-
-                            List<Employee> Employees = JsonConvert.DeserializeObject<List<Employee>>(json);
-
-                            return Employees;
-                        }
-                }
-
-                return null;
-            }
-        }
-
-        public Employee GetEmployee(string id)
-        {
-            string url = GetConnection() + "/employees/" + id;
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
-            request.Method = "GET";
-            request.ContentLength = 0;
-            request.ContentType = "application/json";
-
-            using (var response = (System.Net.HttpWebResponse)request.GetResponse())
-            {
-                var json = string.Empty;
-
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    throw new ApplicationException(response.StatusCode.ToString());
-                }
-
-                using (var responseStream = response.GetResponseStream())
-                {
-                    if (responseStream != null)
-                        using (var reader = new System.IO.StreamReader(responseStream))
-                        {
-                            json = reader.ReadToEnd();
-
-                            Employee Employee = JsonConvert.DeserializeObject<Employee>(json);
-
-                            return Employee;
-                        }
-                }
-
-                return null;
-            }
-        }
-
+        #region Publisher
         public List<Publisher> GetPublishers()
         {
             string url = GetConnection() + "/pubs";
@@ -226,5 +281,6 @@ namespace HallamNathan_Lab04
                 return null;
             }
         }
+        #endregion Publisher
     }
 }
