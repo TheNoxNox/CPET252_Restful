@@ -5,12 +5,14 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using static HallamNathan_Lab04.ViewModels;
 
 namespace HallamNathan_Lab04
 {
     public partial class formMain_Employees : Form
     {
         Connection conn = new Connection();
+        Service service;
 
         public formMain_Employees()
         {
@@ -19,20 +21,23 @@ namespace HallamNathan_Lab04
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            foreach (Employee _Employee in conn.GetEmployees())
+            service = new Service(conn.GetConnection());
+
+            lstvu_employees.View = View.Details;
+            lstvu_employees.GridLines = true;
+            lstvu_employees.MultiSelect = false; // one row at a time
+            lstvu_employees.FullRowSelect = true;
+            lstvu_employees.Columns.Add("First");
+            lstvu_employees.Columns.Add("M");
+            lstvu_employees.Columns.Add("Last");
+
+            foreach (EmployeeViewModel _Employee in service.GetEmployees())
             {
-                _Employee.job = new Job(_Employee.job_id);
-                _Employee.publisher = new Publisher(_Employee.pub_id);
- if (_Employee.mint != null)  lstbx_employees.Items.Add(_Employee.mint);
+                string[] empItems = new string[] { _Employee.FirstName, _Employee.MiddleInitial.ToString(), _Employee.LastName };
+                ListViewItem LVI = new ListViewItem(empItems);
+                LVI.Tag = _Employee;
+                lstvu_employees.Items.Add(LVI);
             }
-
-            Employee test = new Employee("C-1234568", "GERRETAL", 'T', "LNAME", 10, 87, "1389", "19911026");
-
-//            conn.DeleteEmployee(test);
-
-//            conn.PostEmployee(test);
-
-            MessageBox.Show(conn.GetEmployee(test.emp_id).mint.ToString());
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -45,101 +50,4 @@ namespace HallamNathan_Lab04
             Application.Exit();
         }
     }
-
-    public class Employee
-    {
-        public Employee()
-        {
-
-        }
-
-        public Employee(string ID, string FirstName, char MiddleInitial, string LastName, int JobID, int JobLevel, string PubID, string DateOfHire)
-        {
-            emp_id = ID;
-            fname = FirstName;
-            mint = MiddleInitial;
-            lname = LastName;
-            job_id = JobID;
-            job = new Job(job_id);
-            job_lvl = JobLevel;
-            pub_id = PubID;
-            publisher = new Publisher(pub_id);
-            hire_date = DateOfHire;
-        }
-
-        public string emp_id;
-        public string fname;
-        public char mint;
-        public string lname;
-        public int job_id;
-        public int job_lvl;
-        public string pub_id;
-        public string hire_date;
-        public Job job;
-        public Publisher publisher;
-    }
-
-    public class Publisher
-    {
-        public Publisher()
-        {
-
-        }
-
-        public Publisher(string ID, string Name)
-        {
-            id = ID;
-            name = Name;
-        }
-
-        public Publisher(string ID)
-        {
-            id = ID;
-
-//            Publisher temp = new Connection().GetPublisher(id);
-
-//            name = temp.name;
-        }
-
-        public string id;
-        public string name;
-    }
-
-    public class Job
-    {
-        public Job()
-        {
-
-        }
-
-        public Job(int ID, string desc, int minlvl, int maxlvl)
-        {
-            job_id = ID;
-            job_desc = desc;
-            min_lvl = minlvl;
-            max_lvl = maxlvl;
-        }
-
-        public Job(int ID)
-        {
-            job_id = ID;
-
-            Job temp = new Connection().GetJob(job_id);
-
-            job_desc = temp.job_desc;
-            min_lvl = temp.min_lvl;
-            max_lvl = temp.max_lvl;
-        }
-
-        public int job_id { get; set; }
-        [JsonProperty("job_desc")]
-        public string job_desc { get; set; }
-
-        [JsonProperty("min_lvl")]
-        public int min_lvl { get; set; }
-
-        [JsonProperty("max_lvl")]
-        public int max_lvl { get; set; }
-    }
-
 }

@@ -38,7 +38,7 @@ namespace HallamNathan_Lab04
             this.spltcntnr_main = new System.Windows.Forms.SplitContainer();
             this.spltcntnr_employees = new System.Windows.Forms.SplitContainer();
             this.lbl_employee = new System.Windows.Forms.Label();
-            this.lstbx_employees = new System.Windows.Forms.ListBox();
+            this.lstvu_employees = new System.Windows.Forms.ListView();
             this.ts_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spltcntnr_main)).BeginInit();
             this.spltcntnr_main.Panel1.SuspendLayout();
@@ -120,7 +120,7 @@ namespace HallamNathan_Lab04
             // 
             // spltcntnr_employees.Panel2
             // 
-            this.spltcntnr_employees.Panel2.Controls.Add(this.lstbx_employees);
+            this.spltcntnr_employees.Panel2.Controls.Add(this.lstvu_employees);
             this.spltcntnr_employees.Size = new System.Drawing.Size(372, 428);
             this.spltcntnr_employees.SplitterDistance = 25;
             this.spltcntnr_employees.TabIndex = 1;
@@ -135,15 +135,15 @@ namespace HallamNathan_Lab04
             this.lbl_employee.TabIndex = 0;
             this.lbl_employee.Text = "Employees";
             // 
-            // lstbx_employees
+            // lstvu_employees
             // 
-            this.lstbx_employees.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstbx_employees.FormattingEnabled = true;
-            this.lstbx_employees.ItemHeight = 15;
-            this.lstbx_employees.Location = new System.Drawing.Point(0, 0);
-            this.lstbx_employees.Name = "lstbx_employees";
-            this.lstbx_employees.Size = new System.Drawing.Size(372, 399);
-            this.lstbx_employees.TabIndex = 0;
+            this.lstvu_employees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstvu_employees.HideSelection = false;
+            this.lstvu_employees.Location = new System.Drawing.Point(0, 0);
+            this.lstvu_employees.Name = "lstvu_employees";
+            this.lstvu_employees.Size = new System.Drawing.Size(372, 399);
+            this.lstvu_employees.TabIndex = 0;
+            this.lstvu_employees.UseCompatibleStateImageBehavior = false;
             // 
             // formMain_Employees
             // 
@@ -178,9 +178,9 @@ namespace HallamNathan_Lab04
         private System.Windows.Forms.ToolStripMenuItem tsmi_new_employee;
         private System.Windows.Forms.ToolStripMenuItem tsmi_exit;
         private System.Windows.Forms.SplitContainer spltcntnr_main;
-        private System.Windows.Forms.ListBox lstbx_employees;
         private System.Windows.Forms.SplitContainer spltcntnr_employees;
         private System.Windows.Forms.Label lbl_employee;
+        private System.Windows.Forms.ListView lstvu_employees;
     }
 }
 
