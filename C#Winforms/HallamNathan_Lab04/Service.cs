@@ -266,7 +266,7 @@ namespace HallamNathan_Lab04
 
                             foreach (Publisher pub in Publishers)
                             {
-                                PublisherViewModel PubModel = new PublisherViewModel(pub.id, pub.name);
+                                PublisherViewModel PubModel = new PublisherViewModel(pub.pub_id, pub.pub_name, pub.city, pub.state, pub.country);
                                 PubModels.Add(PubModel);
                             }
 
@@ -307,7 +307,7 @@ namespace HallamNathan_Lab04
 
                             if (Publisher.Count == 0) return null;
 
-                            PublisherViewModel PubModel = new PublisherViewModel(Publisher[0].id, Publisher[0].name);
+                            PublisherViewModel PubModel = new PublisherViewModel(Publisher[0].pub_id, Publisher[0].pub_name, Publisher[0].city, Publisher[0].state, Publisher[0].country);
 
                             return PubModel;
                         }

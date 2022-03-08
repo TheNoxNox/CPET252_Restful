@@ -11,8 +11,6 @@ namespace HallamNathan_Lab04
     {
         public class EmployeeViewModel
         {
-            public EmployeeViewModel() { }
-
             public EmployeeViewModel(string emp_id, string fname, char? minit, string lname, JobViewModel job, PublisherViewModel publisher, string hire_date)
             {
                 ID = emp_id;
@@ -35,48 +33,30 @@ namespace HallamNathan_Lab04
 
         public class PublisherViewModel
         {
-            public PublisherViewModel() { }
-
-            public PublisherViewModel(string ID, string Name)
+            public PublisherViewModel(string id, string name, string city, string state, string country)
             {
-                id = ID;
-                name = Name;
+                ID = id;
+                Name = name;
+                City = city;
+                State = state;
+                Country = country;
             }
 
-            public PublisherViewModel(string ID)
-            {
-                id = ID;
-
-                //            Publisher temp = new Connection().GetPublisher(id);
-
-                //            name = temp.name;
-            }
-
-            public string id;
-            public string name;
+            public string ID;
+            public string Name;
+            public string City;
+            public string State;
+            public string Country;
         }
 
         public class JobViewModel
         {
-            public JobViewModel() { }
-
             public JobViewModel(int ID, string desc, int minlvl, int maxlvl)
             {
                 job_id = ID;
                 job_desc = desc;
                 min_lvl = minlvl;
                 max_lvl = maxlvl;
-            }
-
-            public JobViewModel(int ID)
-            {
-//                job_id = ID;
-
-//                JobViewModel temp;
-
- //               job_desc = temp.job_desc;
- //               min_lvl = temp.min_lvl;
- //               max_lvl = temp.max_lvl;
             }
 
             public int job_id { get; set; }
