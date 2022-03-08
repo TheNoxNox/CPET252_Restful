@@ -56,14 +56,3 @@ T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\obj\Debug\net5.0-w
 T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\obj\Debug\net5.0-windows\ref\HallamNathan_Lab04.dll
 T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\obj\Debug\net5.0-windows\HallamNathan_Lab04.pdb
 T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\obj\Debug\net5.0-windows\HallamNathan_Lab04.genruntimeconfig.cache
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.Json.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\Microsoft.Extensions.Primitives.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\System.Runtime.CompilerServices.Unsafe.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\System.Text.Encodings.Web.dll
-T:\HallamNathan\CPET252_Restful\C#Winforms\HallamNathan_Lab04\bin\Debug\net5.0-windows\System.Text.Json.dll
