@@ -11,7 +11,6 @@ namespace HallamNathan_Lab04
 {
     public partial class formMain_Employees : Form
     {
-        Connection conn = new Connection();
         Service service;
 
         public formMain_Employees()
@@ -21,7 +20,7 @@ namespace HallamNathan_Lab04
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            service = new Service(conn.GetConnection());
+            service = new Service(Connection.Get());
 
             lstvu_employees.View = View.Details;
             lstvu_employees.GridLines = true;

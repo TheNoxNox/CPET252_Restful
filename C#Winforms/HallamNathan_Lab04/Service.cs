@@ -22,8 +22,6 @@ namespace HallamNathan_Lab04
             ConnectionURI = connection;
         }
 
-
-
         #region Employees
         public List<EmployeeViewModel> GetEmployees()
         {
