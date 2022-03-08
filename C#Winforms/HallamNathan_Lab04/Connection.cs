@@ -1,23 +1,18 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static HallamNathan_Lab04.ViewModels;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace HallamNathan_Lab04
 {
-    class Connection
+    public static class Connection
     {
-        public string GetConnection()
+        public static string Get()
         {
-            string url = "http://64.72.2.60/rest";
+            var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
 
-            return url;
+            IConfiguration Configuration = builder.Build();
+
+            string con = Configuration["configuration:pubsapiurl"];
+
+            return con;
         }
     }
 }
