@@ -1,0 +1,33 @@
+[HOST] means the IP address of whichever machine (yours or another student's) is hosting the server
+
+(Message me on Discord @TheNoxNox#3693 if you have any issues)
+
+The server requests are as follows
+
+{{GET requests:}}
+
+All Employees: [HOST]/rest/employees
+Employee by ID: [HOST]/rest/employees/[EMP_ID]
+
+All Jobs: [HOST]/rest/jobs
+Job by ID: [HOST/rest/jobs/[JOB_ID]
+
+All Publishers: [HOST]/rest/pubs
+Publishers by ID: [HOST]/rest/pubs/[PUB_ID]
+
+
+{{POST requests:}}
+
+Add Job: [HOST]/rest/jobs (takes JSON object of employee in request body)
+
+Add Employee: [HOST]/rest/jobs (takes JSON object of employee in request body)
+
+
+{{PUT requests:}}
+
+Update Employee: [HOST]/rest/employees (takes JSON object of employee in request body)
+
+
+{{DELETE requests:}}
+
+Delete Employee: [HOST]/rest/employees/[EMP_ID] 
