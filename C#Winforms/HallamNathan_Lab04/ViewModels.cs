@@ -11,13 +11,14 @@ namespace HallamNathan_Lab04
     {
         public class EmployeeViewModel
         {
-            public EmployeeViewModel(string emp_id, string fname, char? minit, string lname, JobViewModel job, PublisherViewModel publisher, string hire_date)
+            public EmployeeViewModel(string emp_id, string fname, char? minit, string lname, JobViewModel job, int job_lvl, PublisherViewModel publisher, string hire_date)
             {
                 ID = emp_id;
                 FirstName = fname;
                 MiddleInitial = (minit.HasValue == true) ? minit.Value : null;
                 LastName = lname;
                 Job = job;
+                JobLevel = job_lvl;
                 Publisher = publisher;
                 DateOfHire = hire_date;
             }
@@ -27,12 +28,18 @@ namespace HallamNathan_Lab04
             public char? MiddleInitial;
             public string LastName;
             public JobViewModel Job;
+            public int JobLevel;
             public PublisherViewModel Publisher;
             public string DateOfHire;
         }
 
         public class PublisherViewModel
         {
+            public override string ToString()
+            {
+                return Name;
+            }
+
             public PublisherViewModel(string id, string name, string city, string state, string country)
             {
                 ID = id;
@@ -51,6 +58,11 @@ namespace HallamNathan_Lab04
 
         public class JobViewModel
         {
+            public override string ToString()
+            {
+                return job_desc;
+            }
+
             public JobViewModel(int ID, string desc, int minlvl, int maxlvl)
             {
                 job_id = ID;

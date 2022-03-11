@@ -56,8 +56,8 @@ namespace HallamNathan_Lab04
                             foreach(Employee emp in Employees)
                             {
                                 EmployeeViewModel EmployeeModel = (emp.minit.HasValue == true) 
-                                    ? new EmployeeViewModel(emp.emp_id, emp.fname, emp.minit.Value, emp.lname, GetJob(emp.job_id), GetPublisher(emp.pub_id), emp.hire_date) 
-                                    : new EmployeeViewModel(emp.emp_id, emp.fname, null, emp.lname, GetJob(emp.job_id), GetPublisher(emp.pub_id), emp.hire_date);
+                                    ? new EmployeeViewModel(emp.emp_id, emp.fname, emp.minit.Value, emp.lname, GetJob(emp.job_id), emp.job_lvl, GetPublisher(emp.pub_id), emp.hire_date) 
+                                    : new EmployeeViewModel(emp.emp_id, emp.fname, null, emp.lname, GetJob(emp.job_id), emp.job_lvl, GetPublisher(emp.pub_id), emp.hire_date);
                                 EmpModels.Add(EmployeeModel);
                             }
 
@@ -99,8 +99,8 @@ namespace HallamNathan_Lab04
                             if (emp.Count == 0) return null;
 
                             EmployeeViewModel Employee = (emp[0].minit.HasValue == true)
-                                    ? new EmployeeViewModel(emp[0].emp_id, emp[0].fname, emp[0].minit.Value, emp[0].lname, GetJob(emp[0].job_id), GetPublisher(emp[0].pub_id), emp[0].hire_date)
-                                    : new EmployeeViewModel(emp[0].emp_id, emp[0].fname, null, emp[0].lname, GetJob(emp[0].job_id), GetPublisher(emp[0].pub_id), emp[0].hire_date);
+                                    ? new EmployeeViewModel(emp[0].emp_id, emp[0].fname, emp[0].minit.Value, emp[0].lname, GetJob(emp[0].job_id), emp[0].job_lvl, GetPublisher(emp[0].pub_id), emp[0].hire_date)
+                                    : new EmployeeViewModel(emp[0].emp_id, emp[0].fname, null, emp[0].lname, GetJob(emp[0].job_id), emp[0].job_lvl, GetPublisher(emp[0].pub_id), emp[0].hire_date);
 
                             return Employee;
                         }
@@ -127,9 +127,25 @@ namespace HallamNathan_Lab04
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            MessageBox.Show(response.StatusCode.ToString());
-
             if (response.StatusCode == HttpStatusCode.OK) return true;
+
+            return false;
+        }
+
+        public bool PostEmployee(EmployeeViewModel employee)
+        {
+            Employee emp = new Employee();
+
+            emp.emp_id = employee.ID;
+            emp.fname = employee.FirstName;
+            emp.minit = employee.MiddleInitial;
+            emp.lname = employee.LastName;
+            emp.job_id = employee.Job.job_id;
+            emp.job_lvl = employee.JobLevel;
+            emp.pub_id = employee.Publisher.ID;
+            emp.hire_date = employee.DateOfHire;
+
+            if (PostEmployee(emp)) return true;
 
             return false;
         }
@@ -147,6 +163,46 @@ namespace HallamNathan_Lab04
             MessageBox.Show(response.StatusCode.ToString());
 
             if (response.StatusCode == HttpStatusCode.OK) return true;
+
+            return false;
+        }
+
+        public bool PutEmployee(Employee employee)
+        {
+            string url = ConnectionURI + "/employees";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); //  url);
+            request.Method = "PUT";
+            request.ContentType = "application/json";
+
+            string json = JsonConvert.SerializeObject(employee);
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            if (response.StatusCode == HttpStatusCode.OK) return true;
+
+            return false;
+        }
+
+        public bool PutEmployee(EmployeeViewModel employee)
+        {
+            Employee emp = new Employee();
+
+            emp.emp_id = employee.ID;
+            emp.fname = employee.FirstName;
+            emp.minit = employee.MiddleInitial;
+            emp.lname = employee.LastName;
+            emp.job_id = employee.Job.job_id;
+            emp.job_lvl = employee.JobLevel;
+            emp.pub_id = employee.Publisher.ID;
+            emp.hire_date = employee.DateOfHire;
+
+            if (PutEmployee(emp)) return true;
 
             return false;
         }
