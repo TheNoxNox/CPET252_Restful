@@ -15,6 +15,7 @@ namespace HallamNathan_Lab04
         private static Random random = new Random();
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-";
 
+        //Used for column sorting
         private ColumnHeader SortingColumn = null;
 
         public formMain_Employees()
@@ -22,7 +23,7 @@ namespace HallamNathan_Lab04
             InitializeComponent();
         }
 
-        public void Form1_Load(object sender, EventArgs e)
+        public void FormLoad(object sender, EventArgs e)
         {
             service = new Service(Connection.Get());
 
@@ -67,11 +68,7 @@ namespace HallamNathan_Lab04
             #endregion Sort by First Name
         }
 
-        private void tsmi_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
+        #region Employee List View
         private void lstvu_employees_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstvu_employees.SelectedItems.Count <= 0) return;
@@ -154,27 +151,6 @@ namespace HallamNathan_Lab04
             lstvu_employees.Sort();
         }
 
-        private void cmbobx_employeeJob_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
-
-            nmrcupdwn_employeeJobLevel.Maximum = job.MaxLevel;
-            nmrcupdwn_employeeJobLevel.Minimum = job.MinLevel;
-            nmrcupdwn_employeeJobLevel.Value = job.MinLevel;
-        }
-
-        private void btn_employeeJobLevelMin_Click(object sender, EventArgs e)
-        {
-            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
-            nmrcupdwn_employeeJobLevel.Value = job.MinLevel;
-        }
-
-        private void btn_employeeJobLevelMax_Click(object sender, EventArgs e)
-        {
-            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
-            nmrcupdwn_employeeJobLevel.Value = job.MaxLevel;
-        }
-
         private void employeeOnValueChange(object sender = null, EventArgs e = null)
         {
             bool canSave = true;
@@ -197,6 +173,29 @@ namespace HallamNathan_Lab04
                 btn_employeeSave.Enabled = false;
                 btn_employeeCreate.Enabled = false;
             }
+        }
+        #endregion Employee List View
+
+        private void cmbobx_employeeJob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
+
+            nmrcupdwn_employeeJobLevel.Maximum = job.MaxLevel;
+            nmrcupdwn_employeeJobLevel.Minimum = job.MinLevel;
+            nmrcupdwn_employeeJobLevel.Value = job.MinLevel;
+        }
+
+        #region Buttons and ToolStripButtons
+        private void btn_employeeJobLevelMin_Click(object sender, EventArgs e)
+        {
+            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
+            nmrcupdwn_employeeJobLevel.Value = job.MinLevel;
+        }
+
+        private void btn_employeeJobLevelMax_Click(object sender, EventArgs e)
+        {
+            JobViewModel job = (JobViewModel)cmbobx_employeeJob.SelectedItem;
+            nmrcupdwn_employeeJobLevel.Value = job.MaxLevel;
         }
 
         private void btn_employeeSave_Click(object sender, EventArgs e)
@@ -250,6 +249,12 @@ namespace HallamNathan_Lab04
             LVI.Tag = employee;
             lstvu_employees.Items.Add(LVI);
         }
+
+        private void tsmi_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion Buttons and ToolStripButtons
 
         //https://stackoverflow.com/questions/1344221/how-can-i-generate-random-alphanumeric-strings
         private string GenerateID()

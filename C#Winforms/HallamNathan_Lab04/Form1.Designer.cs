@@ -397,7 +397,7 @@ namespace HallamNathan_Lab04
             this.Controls.Add(this.ts_main);
             this.Name = "formMain_Employees";
             this.Text = "Employees";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.FormLoad);
             this.ts_main.ResumeLayout(false);
             this.ts_main.PerformLayout();
             this.spltcntnr_main.Panel1.ResumeLayout(false);
