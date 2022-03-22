@@ -164,6 +164,7 @@ namespace HallamNathan_Lab04
             this.lstvu_employees.Size = new System.Drawing.Size(283, 279);
             this.lstvu_employees.TabIndex = 0;
             this.lstvu_employees.UseCompatibleStateImageBehavior = false;
+            this.lstvu_employees.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lstvu_employees_ColumnClick);
             this.lstvu_employees.SelectedIndexChanged += new System.EventHandler(this.lstvu_employees_SelectedIndexChanged);
             // 
             // grpbx_employeeInfo
