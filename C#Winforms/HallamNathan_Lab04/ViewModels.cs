@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,27 +60,27 @@ namespace HallamNathan_Lab04
         {
             public override string ToString()
             {
-                return job_desc;
+                return Description;
             }
 
-            public JobViewModel(int ID, string desc, int minlvl, int maxlvl)
+            public JobViewModel(int job_id, string job_desc, int min_lvl, int max_lvl)
             {
-                job_id = ID;
-                job_desc = desc;
-                min_lvl = minlvl;
-                max_lvl = maxlvl;
+                ID = job_id;
+                Description = job_desc;
+                MinLevel = min_lvl;
+                MaxLevel = max_lvl;
             }
 
-            public int job_id { get; set; }
+            public int ID { get; set; }
 
             [JsonProperty("job_desc")]
-            public string job_desc { get; set; }
+            public string Description { get; set; }
 
             [JsonProperty("min_lvl")]
-            public int min_lvl { get; set; }
+            public int MinLevel { get; set; }
 
             [JsonProperty("max_lvl")]
-            public int max_lvl { get; set; }
+            public int MaxLevel { get; set; }
         }
     }
 }
