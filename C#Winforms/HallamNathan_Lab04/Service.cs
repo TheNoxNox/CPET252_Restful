@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +21,6 @@ namespace HallamNathan_Lab04
         {
             ConnectionURI = connection;
         }
-
-
 
         #region Employees
         public List<EmployeeViewModel> GetEmployees()
@@ -110,7 +108,7 @@ namespace HallamNathan_Lab04
             }
         }
 
-        public bool PostEmployee(Employee employee)
+        public bool PostEmployee(Employee employee, out HttpWebResponse response)
         {
             string url = ConnectionURI + "/employees";
 
@@ -125,14 +123,14 @@ namespace HallamNathan_Lab04
                 streamWriter.Write(json);
             }
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            response = (HttpWebResponse)request.GetResponse();
 
             if (response.StatusCode == HttpStatusCode.OK) return true;
 
             return false;
         }
 
-        public bool PostEmployee(EmployeeViewModel employee)
+        public bool PostEmployee(EmployeeViewModel employee, out HttpWebResponse response)
         {
             Employee emp = new Employee();
 
@@ -140,17 +138,17 @@ namespace HallamNathan_Lab04
             emp.fname = employee.FirstName;
             emp.minit = employee.MiddleInitial;
             emp.lname = employee.LastName;
-            emp.job_id = employee.Job.job_id;
+            emp.job_id = employee.Job.ID;
             emp.job_lvl = employee.JobLevel;
             emp.pub_id = employee.Publisher.ID;
             emp.hire_date = employee.DateOfHire;
 
-            if (PostEmployee(emp)) return true;
+            if (PostEmployee(emp, out response)) return true;
 
             return false;
         }
 
-        public bool DeleteEmployee(string id)
+        public bool DeleteEmployee(string id, out HttpWebResponse response)
         {
             string url = ConnectionURI + "/employees/" + id;
 
@@ -158,16 +156,14 @@ namespace HallamNathan_Lab04
             request.Method = "DELETE";
             request.ContentType = "application/json";
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            MessageBox.Show(response.StatusCode.ToString());
+            response = (HttpWebResponse)request.GetResponse();
 
             if (response.StatusCode == HttpStatusCode.OK) return true;
 
             return false;
         }
 
-        public bool PutEmployee(Employee employee)
+        public bool PutEmployee(Employee employee, out HttpWebResponse response)
         {
             string url = ConnectionURI + "/employees";
 
@@ -182,14 +178,14 @@ namespace HallamNathan_Lab04
                 streamWriter.Write(json);
             }
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            response = (HttpWebResponse)request.GetResponse();
 
             if (response.StatusCode == HttpStatusCode.OK) return true;
 
             return false;
         }
 
-        public bool PutEmployee(EmployeeViewModel employee)
+        public bool PutEmployee(EmployeeViewModel employee, out HttpWebResponse response)
         {
             Employee emp = new Employee();
 
@@ -197,12 +193,12 @@ namespace HallamNathan_Lab04
             emp.fname = employee.FirstName;
             emp.minit = employee.MiddleInitial;
             emp.lname = employee.LastName;
-            emp.job_id = employee.Job.job_id;
+            emp.job_id = employee.Job.ID;
             emp.job_lvl = employee.JobLevel;
             emp.pub_id = employee.Publisher.ID;
             emp.hire_date = employee.DateOfHire;
 
-            if (PutEmployee(emp)) return true;
+            if (PutEmployee(emp, out response)) return true;
 
             return false;
         }
