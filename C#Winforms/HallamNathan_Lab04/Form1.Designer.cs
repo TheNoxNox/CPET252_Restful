@@ -273,7 +273,6 @@ namespace HallamNathan_Lab04
             this.txtbx_employeeFirstName.Name = "txtbx_employeeFirstName";
             this.txtbx_employeeFirstName.Size = new System.Drawing.Size(125, 23);
             this.txtbx_employeeFirstName.TabIndex = 0;
-            this.txtbx_employeeFirstName.Text = "1234567890123457890";
             this.txtbx_employeeFirstName.TextChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // grpbx_employeeJob
@@ -424,7 +423,6 @@ namespace HallamNathan_Lab04
             this.txtbx_employeeLastName.Name = "txtbx_employeeLastName";
             this.txtbx_employeeLastName.Size = new System.Drawing.Size(248, 23);
             this.txtbx_employeeLastName.TabIndex = 2;
-            this.txtbx_employeeLastName.Text = "1234567890123456789012345678901234567890";
             this.txtbx_employeeLastName.TextChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // formMain_Employees
@@ -434,6 +432,7 @@ namespace HallamNathan_Lab04
             this.ClientSize = new System.Drawing.Size(769, 286);
             this.Controls.Add(this.spltcntnr_main);
             this.Controls.Add(this.ts_main);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(785, 325);
             this.Name = "formMain_Employees";
             this.Text = "Employees";
