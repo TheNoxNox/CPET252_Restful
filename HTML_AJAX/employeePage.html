@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Employees AJAX</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+var employeeID;
+// https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/
+$(document).ready(function(){                   // website is loaded
+
+    const qs = window.location.search;
+    const parms = new URLSearchParams(qs);
+    const eid = parms.get(`eid`);
+
+    $.ajax({
+            method: "GET",
+            url: 'http://64.72.1.142/rest/jobs',
+            cache: false,
+            data: "json",
+            success: function(data) {
+                // Ajax call completed successfully
+                console.log("jobStart");
+                $.each(data, function(key, value){
+                    $('#job').append('<option value=' + value.job_id + '>' + value.job_desc + '</option>');
+                });
+                console.log("bye");
+            },
+            error: function(data) {
+                  
+                // Some error in ajax call
+                alert(data);
+            }   
+    });
+    $.ajax({
+            method: "GET",
+            url: 'http://64.72.1.142/rest/pubs',
+            cache: false,
+            data: "json",
+            success: function(data) {
+                // Ajax call completed successfully
+                console.log("pubStart");
+                $.each(data, function(key, value){
+                    $('#publisher').append('<option value=' + value.pub_id + '>' + value.pub_name + '</option>');
+                });
+                console.log("bye");
+            },
+            error: function(data) {
+                  
+                // Some error in ajax call
+                alert(data);
+            }   
+    });
+    if (eid)
+    {
+        $.ajax({
+            method: "GET",
+            url: 'http://64.72.1.142/rest/employees/' + eid,
+            cache: false,
+            data : {'id' : eid},
+            success: function(data) {
+                // Ajax call completed successfully
+                
+                employee = data[0];
+                console.log(employee.emp_id);
+                
+                employeeID = employee.emp_id;
+                document.getElementById("fancytitle").innerHTML = 'Data for ' + employee.fname + ' ' + employee.lname;
+                document.getElementById("fname").value = employee.fname;
+                document.getElementById("minit").value = employee.minit;
+                document.getElementById("lname").value = employee.lname;
+
+                document.getElementById("job").value = employee.job_id;
+                document.getElementById("job_lvl").value = employee.job_lvl;
+
+                document.getElementById("publisher").value = employee.pub_id;
+
+                hdate = employee.hire_date
+                year = hdate.substring(0, 4);
+                month = hdate.substring(4, 6);
+                day = hdate.substring(6, 8);
+                newDate = year + '-' + month + '-' + day;
+
+                document.getElementById("hire_date").value = newDate;
+            },
+            error: function(data) {
+                  
+                // Some error in ajax call
+                alert(data);
+            }   
+    });
+
+    //alert("You are now EDITING an author");
+
+    }
+    else
+    {
+        //alert("You are now ADDING an author");
+    } 
+});
+
+class emp
+{
+    constructor(id, fname, minit, lname, jobid, joblvl, pubid)
+    {
+        this.id = id;
+        this.fname = fname;
+        this.minit = minit;
+        this.lname = lname;
+        this.jobid = jobid;
+        this.joblvl = joblvl;
+        this.pubid = pubid;
+    }
+}
+
+class aJob // NOT DONE!!!
+{
+    constructor(id, fname, minit, lname, jobid, joblvl, pubid)
+    {
+        this.id = id;
+        this.fname = fname;
+        this.minit = minit;
+        this.lname = lname;
+        this.jobid = jobid;
+        this.joblvl = joblvl;
+        this.pubid = pubid;
+    }
+}
+
+function applyClick()
+{
+    var fn = document.getElementById("fname").value;
+    var mi = document.getElementById("minit").value;
+    var ln = document.getElementById("lname").value;
+    var jid = document.getElementById("job").value;
+    var jlvl = document.getElementById("job_lvl").value;
+    var pid = document.getElementById("publisher").value;
+
+    hdate = document.getElementById("hire_date").value;
+    year = hdate.substring(0, 4);
+    month = hdate.substring(5, 7);
+    day = hdate.substring(8, 10);
+    newDate = year + '' + month + '' + day;
+
+    var hd = newDate;
+    
+    var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
+    var empJSON = JSON.stringify(employee);
+    console.log(empJSON);
+
+    if (employeeID)
+    {
+        $.ajax({
+                method: "PUT",
+                url: 'http://64.72.1.142/rest/employees',
+                cache: false,
+                data : {'empl' : empJSON},
+                success: function(data) {
+                    // Ajax call completed successfully
+                    console.log(data);
+                    var $url = `/`;
+                    window.location = $url;
+                },
+                error: function(data) {
+                      
+                    // Some error in ajax call
+                    alert(data);
+                }
+    });
+    }
+    else
+    {
+        $.ajax({
+                method: "POST",
+                url: 'http://64.72.1.142/rest/employees',
+                cache: false,
+                data : {'empl' : empJSON},
+                success: function(data) {
+                    // Ajax call completed successfully
+                    console.log(data);//<option value="volvo">Volvo</option>
+                    var $url = `/`;
+                    window.location = $url;
+                },
+                error: function(data) {
+                      
+                    // Some error in ajax call
+                    alert(data);
+                }
+    });
+    }
+}
+
+function switchJob()
+{
+    aJob = getJob();
+    //document.getElementById("job_lvl").setAttribute(max) = ;
+}
+
+function getJob()
+{
+
+}
+
+</script>
+
+<style></style>
+
+</head>
+
+<body>
+    <b><label id="fancytitle"> </label></b>
+    <div>
+        <br>
+        <label>First Name:</label><br>
+        <input type="text" id="fname" name="fname"><br><br>
+	    <label>Middle Initial:</label><br>
+        <input type="text" id="minit" name="minit" minlength="0" maxlength="1"><br><br>
+        <label>Last Name:</label><br>
+        <input type="text" id="lname" name="lname"><br><br>
+
+        <label>Job:</label><br>
+        <select id="job" name="job" onchange="switchJob()">
+        </select><br><br>
+
+        <label>Job Level:</label><br>
+        <input type="number" id="job_lvl" name="job_lvl"><br><br>
+
+	    <label>Publisher:</label><br>
+        <select id="publisher" name="publisher">
+        </select><br><br>
+
+	    <label>Hire Date:</label><br>
+        <input type="date" id="hire_date" name="hire_date"><br><br>
+        <button onclick=applyClick()> Apply Changes </button>
+    </div>
+</body>
+</html>
