@@ -211,7 +211,7 @@ namespace HallamNathan_Lab04
             this.btn_employeeCreate.Location = new System.Drawing.Point(0, 42);
             this.btn_employeeCreate.Name = "btn_employeeCreate";
             this.btn_employeeCreate.Size = new System.Drawing.Size(225, 41);
-            this.btn_employeeCreate.TabIndex = 1;
+            this.btn_employeeCreate.TabIndex = 2;
             this.btn_employeeCreate.Text = "Create";
             this.btn_employeeCreate.UseVisualStyleBackColor = true;
             this.btn_employeeCreate.Click += new System.EventHandler(this.btn_employeeCreate_Click);
@@ -223,7 +223,7 @@ namespace HallamNathan_Lab04
             this.btn_employeeSave.Location = new System.Drawing.Point(0, 0);
             this.btn_employeeSave.Name = "btn_employeeSave";
             this.btn_employeeSave.Size = new System.Drawing.Size(225, 41);
-            this.btn_employeeSave.TabIndex = 0;
+            this.btn_employeeSave.TabIndex = 1;
             this.btn_employeeSave.Text = "Save";
             this.btn_employeeSave.UseVisualStyleBackColor = true;
             this.btn_employeeSave.Click += new System.EventHandler(this.btn_employeeSave_Click);
@@ -236,7 +236,7 @@ namespace HallamNathan_Lab04
             this.grpbx_employeePublisher.Location = new System.Drawing.Point(248, 114);
             this.grpbx_employeePublisher.Name = "grpbx_employeePublisher";
             this.grpbx_employeePublisher.Size = new System.Drawing.Size(225, 50);
-            this.grpbx_employeePublisher.TabIndex = 8;
+            this.grpbx_employeePublisher.TabIndex = 5;
             this.grpbx_employeePublisher.TabStop = false;
             this.grpbx_employeePublisher.Text = "Publisher";
             // 
@@ -245,11 +245,12 @@ namespace HallamNathan_Lab04
             this.cmbobx_employeePublisher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbobx_employeePublisher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbobx_employeePublisher.FormattingEnabled = true;
             this.cmbobx_employeePublisher.Location = new System.Drawing.Point(3, 19);
             this.cmbobx_employeePublisher.Name = "cmbobx_employeePublisher";
             this.cmbobx_employeePublisher.Size = new System.Drawing.Size(219, 23);
-            this.cmbobx_employeePublisher.TabIndex = 7;
+            this.cmbobx_employeePublisher.TabIndex = 0;
             this.cmbobx_employeePublisher.SelectedValueChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // grpbx_employeeFirstName
@@ -260,7 +261,7 @@ namespace HallamNathan_Lab04
             this.grpbx_employeeFirstName.Location = new System.Drawing.Point(8, 7);
             this.grpbx_employeeFirstName.Name = "grpbx_employeeFirstName";
             this.grpbx_employeeFirstName.Size = new System.Drawing.Size(135, 50);
-            this.grpbx_employeeFirstName.TabIndex = 1;
+            this.grpbx_employeeFirstName.TabIndex = 0;
             this.grpbx_employeeFirstName.TabStop = false;
             this.grpbx_employeeFirstName.Text = "First Name";
             // 
@@ -286,7 +287,7 @@ namespace HallamNathan_Lab04
             this.grpbx_employeeJob.Location = new System.Drawing.Point(8, 113);
             this.grpbx_employeeJob.Name = "grpbx_employeeJob";
             this.grpbx_employeeJob.Size = new System.Drawing.Size(237, 140);
-            this.grpbx_employeeJob.TabIndex = 1;
+            this.grpbx_employeeJob.TabIndex = 4;
             this.grpbx_employeeJob.TabStop = false;
             this.grpbx_employeeJob.Text = "Job";
             // 
@@ -307,7 +308,7 @@ namespace HallamNathan_Lab04
             this.btn_employeeJobLevelMin.Location = new System.Drawing.Point(0, 0);
             this.btn_employeeJobLevelMin.Name = "btn_employeeJobLevelMin";
             this.btn_employeeJobLevelMin.Size = new System.Drawing.Size(113, 41);
-            this.btn_employeeJobLevelMin.TabIndex = 7;
+            this.btn_employeeJobLevelMin.TabIndex = 2;
             this.btn_employeeJobLevelMin.Text = "Min";
             this.btn_employeeJobLevelMin.UseVisualStyleBackColor = true;
             this.btn_employeeJobLevelMin.Click += new System.EventHandler(this.btn_employeeJobLevelMin_Click);
@@ -318,7 +319,7 @@ namespace HallamNathan_Lab04
             this.btn_employeeJobLevelMax.Location = new System.Drawing.Point(119, 0);
             this.btn_employeeJobLevelMax.Name = "btn_employeeJobLevelMax";
             this.btn_employeeJobLevelMax.Size = new System.Drawing.Size(112, 41);
-            this.btn_employeeJobLevelMax.TabIndex = 8;
+            this.btn_employeeJobLevelMax.TabIndex = 3;
             this.btn_employeeJobLevelMax.Text = "Max";
             this.btn_employeeJobLevelMax.UseVisualStyleBackColor = true;
             this.btn_employeeJobLevelMax.Click += new System.EventHandler(this.btn_employeeJobLevelMax_Click);
@@ -338,11 +339,12 @@ namespace HallamNathan_Lab04
             // 
             this.cmbobx_employeeJob.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbobx_employeeJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbobx_employeeJob.FormattingEnabled = true;
             this.cmbobx_employeeJob.Location = new System.Drawing.Point(3, 19);
             this.cmbobx_employeeJob.Name = "cmbobx_employeeJob";
             this.cmbobx_employeeJob.Size = new System.Drawing.Size(231, 23);
-            this.cmbobx_employeeJob.TabIndex = 2;
+            this.cmbobx_employeeJob.TabIndex = 0;
             this.cmbobx_employeeJob.SelectedIndexChanged += new System.EventHandler(this.cmbobx_employeeJob_SelectedIndexChanged);
             this.cmbobx_employeeJob.SelectedValueChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
@@ -352,8 +354,9 @@ namespace HallamNathan_Lab04
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nmrcupdwn_employeeJobLevel.Location = new System.Drawing.Point(6, 75);
             this.nmrcupdwn_employeeJobLevel.Name = "nmrcupdwn_employeeJobLevel";
+            this.nmrcupdwn_employeeJobLevel.ReadOnly = true;
             this.nmrcupdwn_employeeJobLevel.Size = new System.Drawing.Size(228, 23);
-            this.nmrcupdwn_employeeJobLevel.TabIndex = 5;
+            this.nmrcupdwn_employeeJobLevel.TabIndex = 1;
             this.nmrcupdwn_employeeJobLevel.ValueChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // grpbx_employeeMiddleInit
@@ -376,7 +379,7 @@ namespace HallamNathan_Lab04
             this.txtbx_employeeMiddleInit.MaxLength = 1;
             this.txtbx_employeeMiddleInit.Name = "txtbx_employeeMiddleInit";
             this.txtbx_employeeMiddleInit.Size = new System.Drawing.Size(61, 23);
-            this.txtbx_employeeMiddleInit.TabIndex = 1;
+            this.txtbx_employeeMiddleInit.TabIndex = 0;
             this.txtbx_employeeMiddleInit.TextChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // grpbx_employeeHireDate
@@ -387,7 +390,7 @@ namespace HallamNathan_Lab04
             this.grpbx_employeeHireDate.Location = new System.Drawing.Point(8, 57);
             this.grpbx_employeeHireDate.Name = "grpbx_employeeHireDate";
             this.grpbx_employeeHireDate.Size = new System.Drawing.Size(465, 50);
-            this.grpbx_employeeHireDate.TabIndex = 2;
+            this.grpbx_employeeHireDate.TabIndex = 3;
             this.grpbx_employeeHireDate.TabStop = false;
             this.grpbx_employeeHireDate.Text = "Date Hired";
             // 
@@ -399,7 +402,7 @@ namespace HallamNathan_Lab04
             this.dttmpckr_employeeHireDate.Location = new System.Drawing.Point(6, 19);
             this.dttmpckr_employeeHireDate.Name = "dttmpckr_employeeHireDate";
             this.dttmpckr_employeeHireDate.Size = new System.Drawing.Size(453, 23);
-            this.dttmpckr_employeeHireDate.TabIndex = 1;
+            this.dttmpckr_employeeHireDate.TabIndex = 0;
             this.dttmpckr_employeeHireDate.ValueChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // grpbx_employeeLastNam
@@ -409,7 +412,7 @@ namespace HallamNathan_Lab04
             this.grpbx_employeeLastNam.Location = new System.Drawing.Point(216, 7);
             this.grpbx_employeeLastNam.Name = "grpbx_employeeLastNam";
             this.grpbx_employeeLastNam.Size = new System.Drawing.Size(257, 50);
-            this.grpbx_employeeLastNam.TabIndex = 3;
+            this.grpbx_employeeLastNam.TabIndex = 2;
             this.grpbx_employeeLastNam.TabStop = false;
             this.grpbx_employeeLastNam.Text = "Last Name";
             // 
@@ -422,7 +425,7 @@ namespace HallamNathan_Lab04
             this.txtbx_employeeLastName.MaxLength = 30;
             this.txtbx_employeeLastName.Name = "txtbx_employeeLastName";
             this.txtbx_employeeLastName.Size = new System.Drawing.Size(248, 23);
-            this.txtbx_employeeLastName.TabIndex = 2;
+            this.txtbx_employeeLastName.TabIndex = 0;
             this.txtbx_employeeLastName.TextChanged += new System.EventHandler(this.employeeOnValueChange);
             // 
             // formMain_Employees
