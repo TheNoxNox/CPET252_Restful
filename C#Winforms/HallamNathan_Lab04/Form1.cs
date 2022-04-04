@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using static HallamNathan_Lab04.ViewModels;
 using System.Linq;
+using System.Net;
 
 namespace HallamNathan_Lab04
 {
@@ -214,9 +215,9 @@ namespace HallamNathan_Lab04
                 (PublisherViewModel)cmbobx_employeePublisher.SelectedItem,
                 dttmpckr_employeeHireDate.Value.ToSQLString());
 
-            if (!service.PutEmployee(employee)) MessageBox.Show("Could not update Employee", "Database Error", MessageBoxButtons.OK); ;
+            if (!service.PutEmployee(employee, out HttpWebResponse response)) MessageBox.Show($"Could not update Employee! CODE: {response}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
 
-            MessageBox.Show("Employee Updated!", "Updated Database Entry", MessageBoxButtons.OK);
+            MessageBox.Show("Employee Updated!", "Updated Database Entry", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             lstvu_employees.SelectedItems[0].SubItems[0].Text = employee.FirstName;
             lstvu_employees.SelectedItems[0].SubItems[1].Text = employee.MiddleInitial.ToString();
@@ -240,9 +241,9 @@ namespace HallamNathan_Lab04
                 (PublisherViewModel)cmbobx_employeePublisher.SelectedItem,
                 dttmpckr_employeeHireDate.Value.ToSQLString());
 
-            if (!service.PostEmployee(employee)) MessageBox.Show("Could not create Employee", "Database Error", MessageBoxButtons.OK); ;
+            if (!service.PostEmployee(employee, out HttpWebResponse response)) MessageBox.Show($"Could not create Employee\n CODE: {response}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
 
-            MessageBox.Show("Employee Created!", "New Database Entry", MessageBoxButtons.OK);
+            MessageBox.Show("Employee Created!", "New Database Entry", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             string[] empItems = new string[] { employee.FirstName, employee.MiddleInitial.ToString(), employee.LastName };
             ListViewItem LVI = new ListViewItem(empItems);
@@ -254,6 +255,29 @@ namespace HallamNathan_Lab04
         {
             Application.Exit();
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show($"Remove {txtbx_employeeFirstName.Text} {txtbx_employeeLastName.Text} from the database?", "Delete Database Entry?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    if (!service.DeleteEmployee(btn_employeeSave.Tag.ToString(), out HttpWebResponse response))
+                    {
+                        MessageBox.Show($"Could not delete Employee! \n CODE: {response.StatusCode}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    lstvu_employees.Items.Remove(lstvu_employees.SelectedItems[0]);
+                    break;
+                case DialogResult.No:
+                    break;
+                default:
+                    MessageBox.Show("Message Box Result Error", "How did you get here?", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
         #endregion Buttons and ToolStripButtons
 
         //https://stackoverflow.com/questions/1344221/how-can-i-generate-random-alphanumeric-strings
@@ -263,11 +287,11 @@ namespace HallamNathan_Lab04
 
             do
             {
-                ID = new string(Enumerable.Repeat(chars, 9).Select(s => s[random.Next(s.Length)]).ToArray());
+                ID = new string(Enumerable.Repeat(chars, 9).Select(s => s[random.Next(s.Length)]).ToArray());             
             } while (service.GetEmployee(ID) != null);
 
             return ID;
-        }
+        }  
     }
 
     public static class ExtensionMethods

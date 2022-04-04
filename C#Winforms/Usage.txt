@@ -1,0 +1,4 @@
+= Change IP address in "\HallamNathan_Lab04\bin\Debug\net5.0-windows\appsettings.json" to connect to API.
+- All information boxes must be filled in to create / save an employee.
+- Creating a new employee will randomly generate an ID for them.
+- Employees can be sorted (ascending / descending) by clicking header of each column.
