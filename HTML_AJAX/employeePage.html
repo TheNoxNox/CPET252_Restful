@@ -62,7 +62,7 @@ $(document).ready(function(){                   // website is loaded
                 // Ajax call completed successfully
                 
                 employee = data[0];
-                console.log(employee.emp_id);
+                //console.log(employee.emp_id);
                 
                 employeeID = employee.emp_id;
                 document.getElementById("fancytitle").innerHTML = 'Data for ' + employee.fname + ' ' + employee.lname;
@@ -88,7 +88,7 @@ $(document).ready(function(){                   // website is loaded
                 // Some error in ajax call
                 alert(data);
             }   
-    });
+		});
 
     //alert("You are now EDITING an author");
 
@@ -113,17 +113,14 @@ class emp
     }
 }
 
-class aJob // NOT DONE!!!
+class aJob
 {
-    constructor(id, fname, minit, lname, jobid, joblvl, pubid)
+    constructor(id, desc, min, max)
     {
         this.id = id;
-        this.fname = fname;
-        this.minit = minit;
-        this.lname = lname;
-        this.jobid = jobid;
-        this.joblvl = joblvl;
-        this.pubid = pubid;
+        this.desc = desc;
+		this.min = min;
+        this.max = max;
     }
 }
 
@@ -177,7 +174,7 @@ function applyClick()
                 data : {'empl' : empJSON},
                 success: function(data) {
                     // Ajax call completed successfully
-                    console.log(data);//<option value="volvo">Volvo</option>
+                    console.log(data);
                     var $url = `/`;
                     window.location = $url;
                 },
@@ -192,14 +189,32 @@ function applyClick()
 
 function switchJob()
 {
-    aJob = getJob();
-    //document.getElementById("job_lvl").setAttribute(max) = ;
+	jid = document.getElementById("job").value;
+	console.log(jid);
+    $.ajax({
+            method: "GET",
+            url: 'http://64.72.1.142/rest/jobs/' + jid,
+            cache: true,
+			dataType: "json",
+            //data : jid,
+            success: function(data) {
+                // Ajax call completed successfully
+                
+				console.log(data);
+				thisJob = data[0];
+				console.log(thisJob);
+				document.getElementById("job_lvl").setAttribute(max) = aJob.max;
+				document.getElementById("job_lvl").setAttribute(min) = aJob.min;
+            },
+            error: function(data) {
+                  
+                // Some error in ajax call
+                alert(data);
+            }   
+    });
+    
 }
 
-function getJob()
-{
-
-}
 
 </script>
 
@@ -219,7 +234,7 @@ function getJob()
         <input type="text" id="lname" name="lname"><br><br>
 
         <label>Job:</label><br>
-        <select id="job" name="job" onchange="switchJob()">
+        <select id="job" name="job" onchange=switchJob()>
         </select><br><br>
 
         <label>Job Level:</label><br>
