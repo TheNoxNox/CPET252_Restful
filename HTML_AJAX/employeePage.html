@@ -82,6 +82,8 @@ $(document).ready(function(){                   // website is loaded
                 newDate = year + '-' + month + '-' + day;
 
                 document.getElementById("hire_date").value = newDate;
+				
+				switchJob();
             },
             error: function(data) {
                   
@@ -203,8 +205,11 @@ function switchJob()
 				console.log(data);
 				thisJob = data[0];
 				console.log(thisJob);
-				document.getElementById("job_lvl").setAttribute(max) = aJob.max;
-				document.getElementById("job_lvl").setAttribute(min) = aJob.min;
+
+				document.getElementById("job_lvl").max = thisJob.max_lvl;
+				document.getElementById("job_lvl").min = thisJob.min_lvl;
+				
+				levelCheck();
             },
             error: function(data) {
                   
@@ -212,7 +217,28 @@ function switchJob()
                 alert(data);
             }   
     });
-    
+}
+
+function levelCheck()
+{
+	if (document.getElementById("job_lvl").value > document.getElementById("job_lvl").max)
+	{
+		setToMax();
+	}
+	else if (document.getElementById("job_lvl").value < document.getElementById("job_lvl").min)
+	{
+		setToMin();
+	}
+}
+
+function setToMax()
+{
+	document.getElementById("job_lvl").value = document.getElementById("job_lvl").max;
+}
+
+function setToMin()
+{
+	document.getElementById("job_lvl").value = document.getElementById("job_lvl").min;
 }
 
 
@@ -238,7 +264,9 @@ function switchJob()
         </select><br><br>
 
         <label>Job Level:</label><br>
-        <input type="number" id="job_lvl" name="job_lvl"><br><br>
+		<button onclick=setToMin()> MIN </button>
+        <input type="number" id="job_lvl" name="job_lvl" max= 0 min= 0 onchange=levelCheck()>
+		<button onclick=setToMax()> MAX </button><br><br>
 
 	    <label>Publisher:</label><br>
         <select id="publisher" name="publisher">
