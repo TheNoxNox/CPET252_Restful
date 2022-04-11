@@ -5,12 +5,13 @@
 <title>Employees AJAX</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+var sessionIP = "64.72.1.162";
 // https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/
 $(document).ready(function(){                   // website is loaded
     console.log("-) getting all the employees");
     $.ajax({
                 method: "GET",
-                url: 'http://64.72.1.142/rest/employees',
+                url: 'http://' + sessionIP + '/rest/employees',
                 data: "json",
                 cache: false,
                 success: function(data) {
