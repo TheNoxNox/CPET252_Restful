@@ -57,7 +57,37 @@ function editClick(employeeData)
 
 function deleteClick(employeeData)
 {
+    let text = "Delete the employee with ID: " + employeeData + "?";
+    if (confirm(text) == true) 
+    {
+        //alert("This would DELETE this employee...");
+        console.log("TIME TO DELETE");
+        $.ajax({
+                    method: "DELETE",
+                    url: 'http://' + sessionIP + '/rest/employees/' + employeeData,
+                    data: "json",
+                    cache: false,
+                    success: function(data) {  
+                        // Ajax call completed successfully
 
+                        console.log(data);
+                        console.log("DONE");
+                    },
+                    error: function(data) {
+                        
+                        // Some error in ajax call
+                        console.log("UH OH");
+                        alert(data);
+                    }
+        });
+        console.log("ENJOY");
+        var $url = `index.html`;
+        window.location = $url;
+    }
+    else
+    {
+        //alert("That was close. They could've been DELETED!!");
+    }
 }
 </script>
 
@@ -99,6 +129,7 @@ function deleteClick(employeeData)
         <td> 
             <button onclick="addClick()"> Add Employee </button>
         </td>
+        <br><br>
         <table>
             <thead>
                 <tr>
@@ -116,64 +147,25 @@ function deleteClick(employeeData)
 </body>
 </html>
 </body>
-</html>th>Options</th>
-                </tr>
-            </thead>
-            <tbody id="employeeTable">
-                <!-- stuff goes here-->
-            </tbody>
-        </table>
-    </div>
-    <div id="result">
-    </div>
-</body>
-</html>
-</body>
-</html>
-    <div id="result">
-    </div>
-</body>
-</html>
-</body>
-</html>l> <div id="result">
-    </div>
-</body>
-</html>
-</body>
-</html>">
-    </div>
-</body>
-</html>
-</body>
-</html>
-    <div id="result">
-    </div>
-</body>
-</html>
-</body>
-</html>l>
-</body>
-</html>
-</html> </div>
-    <div id="result">
-    </div>
-</body>
-</html>
-</body>
-</html>      <button onclick="addClick()"> Add Employee </button>
-            <!-- <button onclick="addClick()"> New Job </button> -->
+</html> }
+
+    tr:nth-child(even) {
+      background-color: #cad8ff;
+    }
+    
+    </style>
+-->
+
+</head>
+<body>
+    <div>
+        <td> 
+            <button onclick="addClick()"> Add Employee </button>
         </td>
         <table>
             <thead>
                 <tr>
-                    <!-- <th>ID</th> -->
                     <th>Name</th>
-					<!--<th>Middle Initial</th> -->
-                    <!--<th>Last Name</th> -->
-					<!-- <th>Job ID</th> -->
-					<!-- <th>Job Level</th> -->
-					<!-- <th>Publisher ID</th> -->
-					<!-- <th>Hire Date</th> -->
                     <th>Options</th>
                 </tr>
             </thead>
@@ -187,4 +179,4 @@ function deleteClick(employeeData)
 </body>
 </html>
 </body>
-</html>html>
+</html>

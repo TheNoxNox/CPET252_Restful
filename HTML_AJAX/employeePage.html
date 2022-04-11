@@ -98,9 +98,12 @@ $(document).ready(function(){                   // website is loaded
         document.getElementById("fancytitle").innerHTML = 'Add an Employee';
         $('#inputData').prepend(
             '<br>'
-            + '<label>ID:</label><br>'
-            + '<input type="text" id="empid" name="empid"><br><br>'
+            +'<label>ID:</label><br>'
+            + '<input type="text" id="empid" name="empid" pattern="[A-Z]{3}[0-9]{5}[M|F|O]" placeholder="ABC12345O" minlength="9"><br>'
         );
+
+        document.getElementById("job").value = 1;
+        switchJob();
     } 
 });
 
@@ -146,84 +149,91 @@ function applyClick()
 
     var hd = newDate;
 
-    if (!employeeID)
+    if (checkInput(!employeeID))
     {
-        var id = document.getElementById("empid").value;
-        var empJSON = JSON.stringify({
-        emp_id: id,
-        fname: fn,
-        minit: mi,
-        lname: ln,
-        job_id: jid,
-        job_lvl: jlvl,
-        pub_id: pid,
-        hire_date: hd
-        });
-    }
-    else
-    {
-        var empJSON = JSON.stringify({
-        emp_id: employeeID,
-        fname: fn,
-        minit: mi,
-        lname: ln,
-        job_id: jid,
-        job_lvl: jlvl,
-        pub_id: pid,
-        hire_date: hd
-        });
-    }
-    
-    //var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
-    console.log(empJSON);
-    console.log(empJSON);
+            if (!employeeID)
+            {
+                var id = document.getElementById("empid").value;
+                var empJSON = JSON.stringify({
+                emp_id: id,
+                fname: fn,
+                minit: mi,
+                lname: ln,
+                job_id: jid,
+                job_lvl: jlvl,
+                pub_id: pid,
+                hire_date: hd
+                });
+            }
+            else
+            {
+                var empJSON = JSON.stringify({
+                emp_id: employeeID,
+                fname: fn,
+                minit: mi,
+                lname: ln,
+                job_id: jid,
+                job_lvl: jlvl,
+                pub_id: pid,
+                hire_date: hd
+                });
+            }
+            
+            //var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
+            console.log(empJSON);
+            console.log(empJSON);
 
-    if (employeeID)
-    {
-        $.ajax({
-                method: "PUT",
-                contentType: "application/json",
-                url: 'http://' + sessionIP + '/rest/employees',
-                cache: false,
-                data : empJSON,
-                dataType: "json",
-                success: function(data) {
-                    // Ajax call completed successfully
-                    alert("Employee Added!");
-                    //console.log(data);
-                    var $url = `index.html`;
-                    window.location = $url;
-                },
-                error: function(data) {
-                      
-                    // Some error in ajax call
-                    alert(data);
-                }
-    });
-    }
+            if (employeeID)
+            {
+                $.ajax({
+                        method: "PUT",
+                        contentType: "application/json",
+                        url: 'http://' + sessionIP + '/rest/employees',
+                        cache: false,
+                        data : empJSON,
+                        dataType: "json",
+                        success: function(data) {
+                            // Ajax call completed successfully
+                            alert("Employee Added!");
+                            //console.log(data);
+                            var $url = `index.html`;
+                            window.location = $url;
+                        },
+                        error: function(data) {
+                            
+                            // Some error in ajax call
+                            alert(data);
+                        }
+            });
+            }
+            else
+            {
+                $.ajax({
+                        method: "POST",
+                        contentType: "application/json",
+                        url: 'http://' + sessionIP + '/rest/employees',
+                        cache: false,
+                        data : empJSON,
+                        dataType: "json",
+                        success: function(data) {
+                            // Ajax call completed successfully
+                            alert("Employee Added!");
+                            //console.log(data);
+                            var $url = `index.html`;
+                            window.location = $url;
+                        },
+                        error: function(data) {
+                            
+                            // Some error in ajax call
+                            alert(data);
+                        }
+                });
+            }
+        }
     else
     {
-        $.ajax({
-                method: "POST",
-                contentType: "application/json",
-                url: 'http://' + sessionIP + '/rest/employees',
-                cache: false,
-                data : empJSON,
-                dataType: "json",
-                success: function(data) {
-                    // Ajax call completed successfully
-                    alert("Employee Added!");
-                    //console.log(data);
-                    var $url = `index.html`;
-                    window.location = $url;
-                },
-                error: function(data) {
-                      
-                    // Some error in ajax call
-                    alert(data);
-                }
-    });
-    }
+        //alert("Something went wrong.");
+    }         
 }
 
 function switchJob()
@@ -277,13 +287,93 @@ function setToMin()
 {
 	document.getElementById("job_lvl").value = document.getElementById("job_lvl").min;
 }
+
+function checkInput(adding)
+{
+    var fn = document.getElementById("fname").value;
+    var ln = document.getElementById("lname").value;
+    var jid = document.getElementById("job").value;
+    var jlvl = document.getElementById("job_lvl").value;
+    var pid = document.getElementById("publisher").value;
+
+    hdate = document.getElementById("hire_date").value;
+    year = hdate.substring(0, 4);
+    month = hdate.substring(5, 7);
+    day = hdate.substring(8, 10);
+    newDate = year + '' + month + '' + day;
+
+    var hd = newDate;
+
+    if (adding)
+    {
+        var id = document.getElementById("empid").value;
+
+        if (id == "")
+        {
+            alert("ID is required.");
+            return false;
+        }
+        else if (fn == "")
+        {
+            alert("First name is required.");
+            return false;
+        }
+        else if (ln == "")
+        {
+            alert("Last name is required.");
+            return false;
+        }
+        else if (jid == "")
+        {
+            alert("Job is required.");
+            return false;
+        }
+        else if (jlvl == "")
+        {
+            alert("Job level is required.");
+            return false;
+        }
+        else if (pid == "")
+        {
+            alert("Publisher is required.");
+            return false;
+        }
+        else if (hd == "")
+        {
+            alert("Hire date is required.");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        if (jid == "")
+        {
+            alert("Job is required.");
+            return false;
+        }
+        else if (jlvl == "")
+        {
+            alert("Job level is required.");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}
 </script>
 
 </head>
-
 <body>
     <b><label id="fancytitle"> </label></b>
+    
     <div id="inputData">
+        <br>
         <label>First Name:</label><br>
         <input type="text" id="fname" name="fname"><br><br>
 	    <label>Middle Initial:</label><br>
@@ -309,5 +399,4 @@ function setToMin()
         <button onclick=applyClick()> Apply Changes </button>
     </div>
 </body>
-</html>/body>
 </html>
