@@ -162,15 +162,16 @@ function applyClick()
     {
         $.ajax({
                 method: "PUT",
-                contentType: "json",
+                contentType: "application/json",
                 url: 'http://' + sessionIP + '/rest/employees',
                 cache: false,
                 data : empJSON,
                 dataType: "json",
                 success: function(data) {
                     // Ajax call completed successfully
-                    console.log(data);
-                    var $url = `/`;
+                    alert("success...");
+                    //console.log(data);
+                    var $url = `index.html`;
                     window.location = $url;
                 },
                 error: function(data) {
@@ -184,15 +185,16 @@ function applyClick()
     {
         $.ajax({
                 method: "POST",
-                contentType: "json",
+                contentType: "application/json",
                 url: 'http://' + sessionIP + '/rest/employees',
                 cache: false,
                 data : empJSON,
                 dataType: "json",
                 success: function(data) {
                     // Ajax call completed successfully
-                    console.log(data);
-                    var $url = `/`;
+                    alert("success...");
+                    //console.log(data);
+                    var $url = `index.html`;
                     window.location = $url;
                 },
                 error: function(data) {
@@ -290,6 +292,9 @@ function setToMin()
 	    <label>Hire Date:</label><br>
         <input type="date" id="hire_date" name="hire_date"><br><br>
         <button onclick=applyClick()> Apply Changes </button>
+    </div>
+</body>
+</html>k()> Apply Changes </button>
     </div>
 </body>
 </html>
