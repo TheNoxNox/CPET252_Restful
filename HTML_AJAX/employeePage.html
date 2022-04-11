@@ -145,9 +145,24 @@ function applyClick()
     newDate = year + '' + month + '' + day;
 
     var hd = newDate;
-    
-    //var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
-    var empJSON = JSON.stringify({
+
+    if (!employeeID)
+    {
+        var id = document.getElementById("empid").value;
+        var empJSON = JSON.stringify({
+        emp_id: id,
+        fname: fn,
+        minit: mi,
+        lname: ln,
+        job_id: jid,
+        job_lvl: jlvl,
+        pub_id: pid,
+        hire_date: hd
+        });
+    }
+    else
+    {
+        var empJSON = JSON.stringify({
         emp_id: employeeID,
         fname: fn,
         minit: mi,
@@ -156,7 +171,10 @@ function applyClick()
         job_lvl: jlvl,
         pub_id: pid,
         hire_date: hd
-    });
+        });
+    }
+    
+    //var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
     console.log(empJSON);
     console.log(empJSON);
 
@@ -291,12 +309,5 @@ function setToMin()
         <button onclick=applyClick()> Apply Changes </button>
     </div>
 </body>
-</html>ody>
-</html>body>
-</html>    <label>Hire Date:</label><br>
-        <input type="date" id="hire_date" name="hire_date"><br><br>
-        <button onclick=applyClick()> Apply Changes </button>
-    </div>
-</body>
-</html>ml>
+</html>/body>
 </html>
