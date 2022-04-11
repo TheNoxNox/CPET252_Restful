@@ -92,13 +92,15 @@ $(document).ready(function(){                   // website is loaded
                 alert(data);
             }   
 		});
-
-    //alert("You are now EDITING an author");
-
     }
     else
     {
-        //alert("You are now ADDING an author");
+        document.getElementById("fancytitle").innerHTML = 'Add an Employee';
+        $('#inputData').prepend(
+            '<br>'
+            + '<label>ID:</label><br>'
+            + '<input type="text" id="empid" name="empid"><br><br>'
+        );
     } 
 });
 
@@ -169,7 +171,7 @@ function applyClick()
                 dataType: "json",
                 success: function(data) {
                     // Ajax call completed successfully
-                    alert("success...");
+                    alert("Employee Added!");
                     //console.log(data);
                     var $url = `index.html`;
                     window.location = $url;
@@ -192,7 +194,7 @@ function applyClick()
                 dataType: "json",
                 success: function(data) {
                     // Ajax call completed successfully
-                    alert("success...");
+                    alert("Employee Added!");
                     //console.log(data);
                     var $url = `index.html`;
                     window.location = $url;
@@ -257,18 +259,13 @@ function setToMin()
 {
 	document.getElementById("job_lvl").value = document.getElementById("job_lvl").min;
 }
-
-
 </script>
-
-<style></style>
 
 </head>
 
 <body>
     <b><label id="fancytitle"> </label></b>
-    <div>
-        <br>
+    <div id="inputData">
         <label>First Name:</label><br>
         <input type="text" id="fname" name="fname"><br><br>
 	    <label>Middle Initial:</label><br>
@@ -294,7 +291,12 @@ function setToMin()
         <button onclick=applyClick()> Apply Changes </button>
     </div>
 </body>
-</html>k()> Apply Changes </button>
+</html>ody>
+</html>body>
+</html>    <label>Hire Date:</label><br>
+        <input type="date" id="hire_date" name="hire_date"><br><br>
+        <button onclick=applyClick()> Apply Changes </button>
     </div>
 </body>
+</html>ml>
 </html>

@@ -8,53 +8,41 @@
 var sessionIP = "64.72.1.162";
 // https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/
 $(document).ready(function(){                   // website is loaded
-    console.log("-) getting all the employees");
+    console.log("GETTING EMPLOYEES");
     $.ajax({
                 method: "GET",
                 url: 'http://' + sessionIP + '/rest/employees',
                 data: "json",
                 cache: false,
-                success: function(data) {
-                      
+                success: function(data) {  
                     // Ajax call completed successfully
 
-                    //employees = JSON.parse(data); 
-
                     console.log(data);
-                    console.log("tableStart");
+                    console.log("GOT EM");
+                    console.log("BUILDING TABLE");
                     $.each(data, function(key, value){
                         $('#employeeTable').append(
-                                        '<tr>' 
-                                            // + '<td>' + value.emp_id + '</td>'
-                                            + '<td>' + value.fname + ' ' + value.minit + ' ' + value.lname + '</td>'
-                                            // + '<td>' + value.minit + '</td>'
-                                            // + '<td>' + value.lname + '</td>'
-                                            // + '<td>' + value.job_id + '</td>'
-                                            // + '<td>' + value.job_lvl + '</td>'
-                                            // + '<td>' + value.pub_id + '</td>'
-                                            // + '<td>' + value.hire_date + '</td>'
-                                            + '<td>' + '<button onclick="editClick(\''+ value.emp_id +'\')"> Edit </button>'
-											+ '<button onclick="deleteClick(\''+ value.emp_id +'\')"> Delete </button>' + '</td>'
-                                            //+ '<td>' + '<button onclick="alert(\'hahaha\');"> Edit Employee </button>' + '</td>'
-                                            + '</tr>');
-                                            });
-                                            console.log("bye");
-                    //$('#result').html(data);
-                   // alert(data);
+                            '<tr>' 
+                            + '<td>' + value.fname + ' ' + value.minit + ' ' + value.lname + '</td>'
+                            + '<td>' + '<button onclick="editClick(\''+ value.emp_id +'\')"> Edit </button>'
+							+ '<button onclick="deleteClick(\''+ value.emp_id +'\')"> Delete </button>' + '</td>'
+                            + '</tr>'
+                        );
+                    });
+                    console.log("DONE");
                 },
                 error: function(data) {
                       
                     // Some error in ajax call
+                    console.log("UH OH");
                     alert(data);
                 }
     });
-    console.log("-) this is after the ajax");
+    console.log("ENJOY");
 });
 
 function addClick()
 {
-    alert('haha you clicked add employee you silly little thing');
-
     var $url = `employeePage.html`;
 
     window.location = $url;
@@ -62,8 +50,6 @@ function addClick()
 
 function editClick(employeeData)
 {
-    alert('EDIT ID is ' + employeeData + '.');
-
     var $url = `employeePage.html?eid=${employeeData}`;
 
     window.location = $url;
@@ -71,13 +57,12 @@ function editClick(employeeData)
 
 function deleteClick(employeeData)
 {
-    alert('DELETE ID is ' + employeeData + '.');
 
-    //window.location = $url;
 }
 </script>
 
-<style>
+<!--
+    <style>
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
@@ -106,13 +91,76 @@ function deleteClick(employeeData)
     }
     
     </style>
+-->
 
 </head>
-
 <body>
     <div>
         <td> 
             <button onclick="addClick()"> Add Employee </button>
+        </td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable">
+                <!-- stuff goes here-->
+            </tbody>
+        </table>
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable">
+                <!-- stuff goes here-->
+            </tbody>
+        </table>
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>
+    <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>l> <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>">
+    </div>
+</body>
+</html>
+</body>
+</html>
+    <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>l>
+</body>
+</html>
+</html> </div>
+    <div id="result">
+    </div>
+</body>
+</html>
+</body>
+</html>      <button onclick="addClick()"> Add Employee </button>
             <!-- <button onclick="addClick()"> New Job </button> -->
         </td>
         <table>
