@@ -7,6 +7,7 @@
 <script>
 var employeeID;
 var sessionIP = "64.72.1.162";
+var idValid;
 // https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/
 $(document).ready(function(){                   // website is loaded
 
@@ -98,12 +99,23 @@ $(document).ready(function(){                   // website is loaded
         document.getElementById("fancytitle").innerHTML = 'Add an Employee';
         $('#inputData').prepend(
             '<br>'
-            +'<label>ID:</label><br>'
-            + '<input type="text" id="empid" name="empid" pattern="[A-Z]{3}[0-9]{5}[M|F|O]" placeholder="ABC12345O" minlength="9"><br>'
+            + '<label>ID:</label><br>'
+            + '<input type="text" id="empid" name="empid" placeholder="#####" minlength="5" maxlength="5" onchange="setCurrentID()"><br>'
+            + '<small id="currentID"></small><br>'
+        );
+        $('#genderRegion').prepend(
+            '<label>Gender:</label><br>'
+            + '<input type="radio" id="male" name="gender" value="M" onchange="setCurrentID()">'
+            + '<label for="male">Male</label><br>'
+            + '<input type="radio" id="female" name="gender" value="F" onchange="setCurrentID()">'
+            + '<label for="female">Female</label><br>'
+            + '<input type="radio" id="other" name="gender" value="O" checked onchange="setCurrentID()">'
+            + '<label for="other">Other</label><br>'
         );
 
         document.getElementById("job").value = 1;
         switchJob();
+        setCurrentID();
     } 
 });
 
@@ -153,7 +165,7 @@ function applyClick()
     {
             if (!employeeID)
             {
-                var id = document.getElementById("empid").value;
+                var id = getCurrentID();//document.getElementById("empid").value;
                 var empJSON = JSON.stringify({
                 emp_id: id,
                 fname: fn,
@@ -194,7 +206,7 @@ function applyClick()
                         dataType: "json",
                         success: function(data) {
                             // Ajax call completed successfully
-                            alert("Employee Added!");
+                            alert("Employee Updated!");
                             //console.log(data);
                             var $url = `index.html`;
                             window.location = $url;
@@ -288,9 +300,96 @@ function setToMin()
 	document.getElementById("job_lvl").value = document.getElementById("job_lvl").min;
 }
 
+function setCurrentID()
+{
+    var fn = document.getElementById("fname").value;
+    var mi = document.getElementById("minit").value;
+    var ln = document.getElementById("lname").value;
+    var gend = getGender()
+    //let gendString = String(gend);
+    var finit= fn.charAt(0);
+    if (mi)
+    {
+        var minit= mi
+    }
+    else
+    {
+       var minit= "-"
+    }
+    var linit= ln.charAt(0);
+
+    var id = finit.toUpperCase() + minit.toUpperCase() + linit.toUpperCase() + document.getElementById("empid").value.toUpperCase() + gend;
+    let idString = String(id);
+    
+    if (fn == "")
+    {
+        document.getElementById("currentID").innerHTML = "First name required.";
+        idValid = 0;
+    }
+    else if (ln == "")
+    {
+        document.getElementById("currentID").innerHTML = "Last name required.";
+        idValid = 0;
+    }
+    else if (id == "")
+    {
+        document.getElementById("currentID").innerHTML = "Input ID is required.";
+        idValid = 0;
+    }
+    else if (idString.length != 9)
+    {
+        document.getElementById("currentID").innerHTML = "Input ID must be five characters long.";
+        idValid = 0;
+    }
+    else
+    {
+        document.getElementById("currentID").innerHTML = 'Current ID: ' + idString;
+        idValid = 1;
+    } 
+}
+
+function getCurrentID()
+{
+    var fn = document.getElementById("fname").value;
+    var mi = document.getElementById("minit").value;
+    var ln = document.getElementById("lname").value;
+    var gend = getGender()
+    //let gendString = String(gend);
+    var finit= fn.charAt(0);
+    if (mi)
+    {
+        var minit= mi
+    }
+    else
+    {
+       var minit= "-"
+    }
+    var linit= ln.charAt(0);
+
+    var id = finit.toUpperCase() + minit.toUpperCase() + linit.toUpperCase() + document.getElementById("empid").value.toUpperCase() + gend;
+    return String(id);
+}
+
+function getGender()
+{
+    if(document.getElementById('male').checked) 
+    {
+        return document.getElementById('male').value
+    }
+    else if(document.getElementById('female').checked) 
+    {
+        return document.getElementById('female').value
+    }
+    else
+    {
+        return document.getElementById('other').value
+    }
+}
+
 function checkInput(adding)
 {
     var fn = document.getElementById("fname").value;
+    var mi = document.getElementById("minit").value;
     var ln = document.getElementById("lname").value;
     var jid = document.getElementById("job").value;
     var jlvl = document.getElementById("job_lvl").value;
@@ -306,14 +405,24 @@ function checkInput(adding)
 
     if (adding)
     {
-        var id = document.getElementById("empid").value;
-
-        if (id == "")
+        var gend = getGender()
+        //let gendString = String(gend);
+        var finit= fn.charAt(0);
+        if (mi)
         {
-            alert("ID is required.");
-            return false;
+            var minit= mi
         }
-        else if (fn == "")
+        else
+        {
+            var minit= "-"
+        }
+        var linit= ln.charAt(0);
+
+        var id = finit.toUpperCase() + minit.toUpperCase() + linit.toUpperCase() + document.getElementById("empid").value.toUpperCase() + gend;
+        let idString = String(id);
+
+        
+        if (fn == "")
         {
             alert("First name is required.");
             return false;
@@ -323,6 +432,13 @@ function checkInput(adding)
             alert("Last name is required.");
             return false;
         }
+
+        else if (idValid == 0)
+        {
+            alert("ID is invalid.");
+            return false;
+        }
+
         else if (jid == "")
         {
             alert("Job is required.");
@@ -362,7 +478,7 @@ function checkInput(adding)
         }
         else
         {
-            return true;
+            return true; 
         }
     }
 }
@@ -375,11 +491,15 @@ function checkInput(adding)
     <div id="inputData">
         <br>
         <label>First Name:</label><br>
-        <input type="text" id="fname" name="fname"><br><br>
+        <input type="text" id="fname" name="fname" onchange="setCurrentID()"><br><br>
 	    <label>Middle Initial:</label><br>
-        <input type="text" id="minit" name="minit" minlength="0" maxlength="1"><br><br>
+        <input type="text" id="minit" name="minit" minlength="0" maxlength="1" onchange="setCurrentID()"><br><br>
         <label>Last Name:</label><br>
-        <input type="text" id="lname" name="lname"><br><br>
+        <input type="text" id="lname" name="lname" onchange="setCurrentID()"><br><br>
+
+        <div id="genderRegion">
+            <!-- thingy goes here -->
+        </div>
 
         <label>Job:</label><br>
         <select id="job" name="job" onchange=switchJob()>
@@ -396,7 +516,7 @@ function checkInput(adding)
 
 	    <label>Hire Date:</label><br>
         <input type="date" id="hire_date" name="hire_date"><br><br>
-        <button onclick=applyClick()> Apply Changes </button>
+        <button type="submit" onclick=applyClick()> Apply Changes </button> 
     </div>
 </body>
-</html>
+</html>tml>
