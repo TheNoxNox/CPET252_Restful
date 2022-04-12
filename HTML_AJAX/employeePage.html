@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>Employees AJAX</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
 var employeeID;
 var sessionIP = "64.72.1.162";
@@ -324,26 +326,31 @@ function setCurrentID()
     if (fn == "")
     {
         document.getElementById("currentID").innerHTML = "First name required.";
+        document.getElementById("currentID").classList.add("text-danger");
         idValid = 0;
     }
     else if (ln == "")
     {
         document.getElementById("currentID").innerHTML = "Last name required.";
+        document.getElementById("currentID").classList.add("text-danger");
         idValid = 0;
     }
     else if (id == "")
     {
         document.getElementById("currentID").innerHTML = "Input ID is required.";
+        document.getElementById("currentID").classList.add("text-danger");
         idValid = 0;
     }
     else if (idString.length != 9)
     {
         document.getElementById("currentID").innerHTML = "Input ID must be five characters long.";
+        document.getElementById("currentID").classList.add("text-danger");
         idValid = 0;
     }
     else
     {
         document.getElementById("currentID").innerHTML = 'Current ID: ' + idString;
+        document.getElementById("currentID").classList.remove("text-danger");
         idValid = 1;
     } 
 }
@@ -486,37 +493,45 @@ function checkInput(adding)
 
 </head>
 <body>
-    <b><label id="fancytitle"> </label></b>
-    
-    <div id="inputData">
-        <br>
-        <label>First Name:</label><br>
-        <input type="text" id="fname" name="fname" onchange="setCurrentID()"><br><br>
-	    <label>Middle Initial:</label><br>
-        <input type="text" id="minit" name="minit" minlength="0" maxlength="1" onchange="setCurrentID()"><br><br>
-        <label>Last Name:</label><br>
-        <input type="text" id="lname" name="lname" onchange="setCurrentID()"><br><br>
+    <div id="inputData" class="container">
+        <h3 id="fancytitle">DATA</h3>
+        <form>
+            <div class="form-row">
+                <div class="col">
+                    <label>First Name:</label>
+                    <input type="text" class="form-control" id="fname" name="fname" onchange="setCurrentID()">
+                </div>
+                <div class="col">
+                    <label>Middle Initial:</label>
+                    <input type="text" class="form-control" id="minit" name="minit" minlength="0" maxlength="1" onchange="setCurrentID()">
+                </div>
+                <div class="col">
+                    <label>Last Name:</label>
+                    <input type="text" class="form-control" id="lname" name="lname" onchange="setCurrentID()">
+                </div>
+            </div>
+        </form>
 
         <div id="genderRegion">
             <!-- thingy goes here -->
         </div>
 
         <label>Job:</label><br>
-        <select id="job" name="job" onchange=switchJob()>
+        <select class="form-control" id="job" name="job" onchange=switchJob()>
         </select><br><br>
 
         <label>Job Level:</label><br>
 		<button onclick=setToMin()> MIN </button>
-        <input type="number" id="job_lvl" name="job_lvl" max= 0 min= 0 onchange=levelCheck()>
+        <input type="number" class="form-control" id="job_lvl" name="job_lvl" max= 0 min= 0 onchange=levelCheck()>
 		<button onclick=setToMax()> MAX </button><br><br>
 
 	    <label>Publisher:</label><br>
-        <select id="publisher" name="publisher">
+        <select id="publisher" class="form-control" name="publisher">
         </select><br><br>
 
 	    <label>Hire Date:</label><br>
-        <input type="date" id="hire_date" name="hire_date"><br><br>
-        <button type="submit" onclick=applyClick()> Apply Changes </button> 
+        <input type="date" class="form-control" id="hire_date" name="hire_date"><br><br>
+        <button type="submit" class="btn btn-success" onclick=applyClick()> Apply Changes </button> 
     </div>
 </body>
-</html>tml>
+</html>
