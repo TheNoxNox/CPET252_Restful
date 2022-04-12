@@ -53,7 +53,16 @@ function Other()
 }
 function Edit()
 {
-
+  return (
+    <>
+    <nav>
+    <Link to="/"> Home </Link>
+  </nav>
+    <div className="ed">
+      <EditEmployee/>
+    </div>
+    </>
+  );
 }
 function Add()
 {
@@ -160,7 +169,7 @@ class Current {
   }
 }
 
-class AddEmployee extends React.Component {
+class EditEmployee extends React.Component {
   
   constructor(props) {
       super(props)
@@ -170,15 +179,12 @@ class AddEmployee extends React.Component {
       
   }
 
-  componentDidUnmount() {
+  componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(), 1000
     );
-
-    let self = this;
-
-    /*
       let self = this;
+      //add employee id to end
       fetch('http://64.72.1.43/rest/employees', {
           method: 'GET'
       }).then(function(response) {
@@ -191,18 +197,93 @@ class AddEmployee extends React.Component {
       }).catch(err => {
       console.log('caught it!',err);
       })
-      */
   }
-  tick()
-  {
-   
-  }
-  render() {
+  componentDidUnmount() {
     
-      return (
-        
-       
-        
+      let self = this;
+      //add employee id to end
+      fetch('http://64.72.1.43/rest/employees', {
+          method: 'PUT'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+        //send stuff here
+          self.setState({employees: data});
+      }).catch(err => {
+      console.log('caught it!',err);
+      })
+  }
+  render() {    
+      return (        
+          <div className="container"> 
+          <div className="panel panel-default p50 uth-panel">
+              <table className="table table-dark" border="1px solid black">
+                  <thead>
+                      <tr>
+                          <th>First Name</th>
+                          <th>M.I.</th>
+                          <th>Last Name</th>
+                          <th>Job ID</th>
+                          <th>Job Level</th>
+                          <th>Publisher</th>
+                          <th>Hire Date</th>
+                          <th>...</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.employees.map(employee =>
+                      <tr key={employee.emp_id}>
+                      <td>{employee.fname} </td>
+                      <td>{employee.minit} </td>
+                      <td>{employee.lname} </td>
+                      <td><Input value={employee.job_id}> </Input> </td>
+                      <td><Input value={employee.job_lvl}> </Input> </td>
+                      <td>{employee.pub_id} </td>
+                      <td>{employee.hire_date} </td>
+                      <td><a>Edit</a></td>
+                      </tr>
+                  )}
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      
+      
+    );
+    
+  }
+}
+class AddEmployee extends React.Component {
+  
+  constructor(props) {
+      super(props)
+      this.state = {
+          employees: []
+      }
+      
+  }
+
+  componentDidUnmount() {
+      let self = this;
+      fetch('http://64.72.1.43/rest/employees', {
+          method: 'POST'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+        //send stuff here
+          self.setState({employees: data});
+      }).catch(err => {
+      console.log('caught it!',err);
+      })
+  }
+  render() {  
+      return (  
           <div className="container"> 
           <div className="panel panel-default p50 uth-panel">
               <>
@@ -235,6 +316,7 @@ class AddEmployee extends React.Component {
 
                   <label>Publisher</label><br></br>
                   <select>
+                    
                     <option value="0736">New Moon Books</option>
                     <option value="0877">Binnet and Hardley</option>
                     <option value="1389">Algodata Infosystems</option>
