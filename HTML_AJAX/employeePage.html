@@ -8,7 +8,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
 var employeeID;
-var sessionIP = "64.72.1.162";
+var sessionIP = "64.72.2.52";
 var idValid;
 // https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/
 $(document).ready(function(){                   // website is loaded
@@ -167,7 +167,7 @@ function applyClick()
 	setCurrentID(true);
     if (checkInput(!employeeID))
     {
-            if (!employeeID)
+            if (!employeeID) // adding
             {
                 var id = getCurrentID();//document.getElementById("empid").value;
                 var empJSON = JSON.stringify({
@@ -196,7 +196,6 @@ function applyClick()
             }
             
             //var employee = new emp(employeeID, fn, mi, ln, jid, jlvl, pid, hd);
-            console.log(empJSON);
             console.log(empJSON);
 
             if (employeeID)
@@ -306,119 +305,122 @@ function setToMin()
 
 function setCurrentID(applyClicked)
 {
-    var fn = document.getElementById("fname").value;
-    var mi = document.getElementById("minit").value;
-    var ln = document.getElementById("lname").value;
-    var gend = getGender()
-	hdate = document.getElementById("hire_date").value;
-    year = hdate.substring(0, 4);
-    month = hdate.substring(5, 7);
-    day = hdate.substring(8, 10);
-    newDate = year + '' + month + '' + day;
-
-    var hd = newDate;
-    //let gendString = String(gend);
-    var finit= fn.charAt(0);
-    if (mi)
-    {
-        var minit= mi
-    }
-    else
-    {
-       var minit= "-"
-    }
-    var linit= ln.charAt(0);
-
-    var id = finit.toUpperCase() + minit.toUpperCase() + linit.toUpperCase() + document.getElementById("empid").value.toUpperCase() + gend;
-    let idString = String(id);
-    
-    if (fn == "")
-    {
-        document.getElementById("currentID").innerHTML = "First name required.";
-        document.getElementById("currentID").classList.add("text-danger");
-
-        idValid = 0;
-    }
-    else if (ln == "")
-    {
-        document.getElementById("currentID").innerHTML = "Last name required.";
-        document.getElementById("currentID").classList.add("text-danger");
-
-        idValid = 0;
-    }
-    else if (id == "")
-    {
-        document.getElementById("currentID").innerHTML = "Input ID is required.";
-        document.getElementById("currentID").classList.add("text-danger");
-
-        idValid = 0;
-    }
-    else if (idString.length != 9)
-    {
-        document.getElementById("currentID").innerHTML = "Input ID must be five characters long.";
-        document.getElementById("currentID").classList.add("text-danger");
-
-        idValid = 0;
-    }
-    else
-    {
-        document.getElementById("currentID").innerHTML = 'Current ID: ' + idString;
-        document.getElementById("currentID").classList.remove("text-danger");
-        idValid = 1;
-    }
-	
-	
-	
-	if (fn == "")
+	if (!employeeID)
 	{
-		if (applyClicked)
+		var fn = document.getElementById("fname").value;
+		var mi = document.getElementById("minit").value;
+		var ln = document.getElementById("lname").value;
+		var gend = getGender()
+		hdate = document.getElementById("hire_date").value;
+		year = hdate.substring(0, 4);
+		month = hdate.substring(5, 7);
+		day = hdate.substring(8, 10);
+		newDate = year + '' + month + '' + day;
+
+		var hd = newDate;
+		//let gendString = String(gend);
+		var finit= fn.charAt(0);
+		if (mi)
 		{
-			document.getElementById("fStyle").classList.add("has-error");
+			var minit= mi
 		}
-			
-	}
-	else
-	{
-		document.getElementById("fStyle").classList.remove("has-error");
-	}
-	
-	if (ln == "")
-	{
-		if (applyClicked)
+		else
 		{
-			document.getElementById("lStyle").classList.add("has-error");
+		   var minit= "-"
 		}
-			
-	}
-	else
-	{
-		document.getElementById("lStyle").classList.remove("has-error");
-	}
-	
-	if (id == "" || idString.length != 9)
-	{
-		if (applyClicked)
+		var linit= ln.charAt(0);
+
+		var id = finit.toUpperCase() + minit.toUpperCase() + linit.toUpperCase() + document.getElementById("empid").value.toUpperCase() + gend;
+		let idString = String(id);
+		
+		if (fn == "")
 		{
-			document.getElementById("iStyle").classList.add("has-error");
+			document.getElementById("currentID").innerHTML = "First name required.";
+			document.getElementById("currentID").classList.add("text-danger");
+
+			idValid = 0;
 		}
-			
-	}
-	else
-	{
-		document.getElementById("iStyle").classList.remove("has-error");
-	}
-	
-	if (hd == "")
-	{
-		if (applyClicked)
+		else if (ln == "")
 		{
-			document.getElementById("hStyle").classList.add("has-error");
+			document.getElementById("currentID").innerHTML = "Last name required.";
+			document.getElementById("currentID").classList.add("text-danger");
+
+			idValid = 0;
 		}
-			
-	}
-	else
-	{
-		document.getElementById("hStyle").classList.remove("has-error");
+		else if (id == "")
+		{
+			document.getElementById("currentID").innerHTML = "Input ID is required.";
+			document.getElementById("currentID").classList.add("text-danger");
+
+			idValid = 0;
+		}
+		else if (idString.length != 9)
+		{
+			document.getElementById("currentID").innerHTML = "Input ID must be five characters long.";
+			document.getElementById("currentID").classList.add("text-danger");
+
+			idValid = 0;
+		}
+		else
+		{
+			document.getElementById("currentID").innerHTML = 'Current ID: ' + idString;
+			document.getElementById("currentID").classList.remove("text-danger");
+			idValid = 1;
+		}
+		
+		
+		
+		if (fn == "")
+		{
+			if (applyClicked)
+			{
+				document.getElementById("fStyle").classList.add("has-error");
+			}
+				
+		}
+		else
+		{
+			document.getElementById("fStyle").classList.remove("has-error");
+		}
+		
+		if (ln == "")
+		{
+			if (applyClicked)
+			{
+				document.getElementById("lStyle").classList.add("has-error");
+			}
+				
+		}
+		else
+		{
+			document.getElementById("lStyle").classList.remove("has-error");
+		}
+		
+		if (id == "" || idString.length != 9)
+		{
+			if (applyClicked)
+			{
+				document.getElementById("iStyle").classList.add("has-error");
+			}
+				
+		}
+		else
+		{
+			document.getElementById("iStyle").classList.remove("has-error");
+		}
+		
+		if (hd == "")
+		{
+			if (applyClicked)
+			{
+				document.getElementById("hStyle").classList.add("has-error");
+			}
+				
+		}
+		else
+		{
+			document.getElementById("hStyle").classList.remove("has-error");
+		}
 	}
 }
 
@@ -597,11 +599,11 @@ function checkInput(adding)
 					<label>Job Level:</label><br>
 					<div class="input-group">
 					<div class="input-group-btn">
-						<button class="btn btn-default" onclick=setToMin()> MIN </button>
+						<button type="button" class="btn btn-default" onclick=setToMin()> MIN </button>
 					  </div>
 					  <input type="number" class="form-control" id="job_lvl" name="job_lvl" max= 0 min= 0 onchange=levelCheck()>
 					  <div class="input-group-btn">
-						<button class="btn btn-default" onclick=setToMax()> MAX </button>
+						<button type="button" class="btn btn-default" onclick=setToMax()> MAX </button>
 					  </div>
 					</div>
 				</div>
