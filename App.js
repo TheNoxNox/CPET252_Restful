@@ -1,4 +1,3 @@
-
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import logo from './logo.svg';
@@ -231,127 +230,7 @@ class EditEmployee extends React.Component {
                       <td>{fname} </td>
                       <td>{minit} </td>
                       <td>{lname} </td>
-                     <td> <input defaultValue={job_id}></input> </td>      count: props.start,
-356
-      start : props.start,
-357
-      max: props.max 
-358
-    };
-359
-​
-360
-    this.j = props.jolly; 
-361
-    
-362
-  }
-363
-​
-364
-  // 3. lifecycle method - called after the component is rendered to the DOM
-365
-  componentDidMount() {
-366
-    this.timerID = setInterval(
-367
-      () => this.tick(), 1000
-368
-    );
-369
-  }
-370
-​
-371
-  // another lifecycle method 
-372
-  componentWillUnmount() {
-373
-    clearInterval(this.timerID); // kill timer 
-374
-  }
-375
-​
-376
-  increment()
-377
-  {
-378
-    if(this.state.count >= this.state.max) return this.state.start; 
-379
-​
-380
-    return this.state.count + 1; 
-381
-  }
-382
-​
-383
-  tick() {
-384
-​
-385
-    // this should be the only place you change state, so render is called.  
-386
-​
-387
-    this.setState({  // 'schedules' call to render 
-388
-      datex: new Date(), // new value for inside of state property
-389
-      count: this.increment()
-390
-    });
-391
-  }
-392
-​
-393
-  // 2. called after ctor by React
-394
-  render() {
-395
-    return (
-396
-      <div>
-397
-        <h1>Hello {this.j}</h1>
-398
-        <h2>It is {this.state.datex.toLocaleTimeString()}.</h2>
-399
-        <h2>Count {this.state.count}</h2>
-400
-      </div>
-401
-    );
-402
-  }
-403
-}
-404
-​
-405
-// has to be after the creation of Clock
-406
-// could pass args here or in the call above.
-407
-// OR you can just  use <Clock, as you see here.  
-408
-// NOTE input for properties.  
-409
-const Clocker = <Clock jolly="ken" start={5} max={10}/>; 
-410
-//const Clocker =<Clock oi="Employees" s
-411
-​
-412
-​
-413
-​
-414
-​
-415
-export default App;
+                     <td> <input defaultValue={job_id}></input> </td>
                      <td> <input defaultValue={job_lvl}></input> </td>
                       <td>{pub_id} </td>
                       <td>{hire_date} </td>
@@ -360,6 +239,9 @@ export default App;
                   )}
                   </tbody>
               </table>
+              <button >
+                Save
+                </button>
           </div>
         </div>
       
@@ -367,6 +249,7 @@ export default App;
     );
     
   }
+  
 }
 class AddEmployee extends React.Component {
   
